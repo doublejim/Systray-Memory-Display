@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = memtray-v1.4
+TARGET = memtray
 TEMPLATE = app
 
 
