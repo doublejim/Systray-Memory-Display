@@ -11,22 +11,24 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = memtray
 TEMPLATE = app
 
-
-SOURCES += main.cpp\
-    settingswindow.cpp \
-    aboutdialog.cpp
+SOURCES += main.cpp \
+    aboutdialog.cpp \
+    trayicon.cpp \
+    mainwindow.cpp \
+    settings.cpp \
+    memoryusage.cpp
 
 HEADERS  += \
-    trayicon.h \
+    aboutdialog.h \
     memoryusage.h \
     settings.h \
     settingsdefaults.h \
-    settingswindow.h \
-    aboutdialog.h
+    trayicon.h \
+    mainwindow.h
 
 FORMS    += \
-    settingswindow.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    mainwindow.ui
 
 RESOURCES += \
     resources.qrc

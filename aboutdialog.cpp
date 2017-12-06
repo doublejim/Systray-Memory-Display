@@ -12,3 +12,9 @@ AboutDialog::~AboutDialog()
 {
     delete ui;
 }
+
+void AboutDialog::on_buttonBox_clicked(QAbstractButton *button)
+{
+    Q_UNUSED(button);
+    done(0);
+}

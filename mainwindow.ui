@@ -6,36 +6,36 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>371</width>
-    <height>349</height>
+    <width>438</width>
+    <height>487</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Systray Memory Display v1</string>
+   <string>Systray Memory Display v1.4</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
     <normaloff>:/icon/appicon.png</normaloff>:/icon/appicon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,0">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
        <string>General</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QRadioButton" name="radioShowProgress">
          <property name="text">
-          <string>Show usage amount on background.</string>
+          <string>Show &amp;usage amount on background.</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QRadioButton" name="radioShowSolidBackground">
          <property name="text">
-          <string>Solid color background.</string>
+          <string>Solid color bac&amp;kground.</string>
          </property>
         </widget>
        </item>
@@ -49,7 +49,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="label_3">
            <property name="text">
             <string>Update interval:</string>
            </property>
@@ -88,7 +88,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="label_4">
            <property name="text">
             <string>ms</string>
            </property>
@@ -100,180 +100,362 @@
      </widget>
     </item>
     <item>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="title">
+       <string>Linux only</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QCheckBox" name="checkBoxAvailableMemory">
+         <property name="text">
+          <string>Value is based on available memory instead of free memory
+(recommended).</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
      <widget class="QGroupBox" name="groupBox_2">
       <property name="title">
        <string>Colors</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,0,0">
-         <item>
-          <widget class="QLabel" name="labelColor1">
-           <property name="text">
-            <string>Text color top (free)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="editColorText1">
-           <property name="maximumSize">
-            <size>
-             <width>70</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="baseSize">
-            <size>
-             <width>10</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Courier New</family>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnColor1">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Pick a color...</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="3" column="7">
+        <widget class="QPushButton" name="btnColor4">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Pick a color...</string>
+         </property>
+        </widget>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0,0">
-         <item>
-          <widget class="QLabel" name="labelColor2">
-           <property name="text">
-            <string>Text color bottom (used)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="editColorText2">
-           <property name="maximumSize">
-            <size>
-             <width>70</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Courier New</family>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnColor2">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Pick a color...</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="1" column="7">
+        <widget class="QPushButton" name="btnColor2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Pick a color...</string>
+         </property>
+        </widget>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0">
-         <item>
-          <widget class="QLabel" name="labelColor3">
-           <property name="text">
-            <string>Background color top (free)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="editColorBack1">
-           <property name="maximumSize">
-            <size>
-             <width>70</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Courier New</family>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnColor3">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Pick a color...</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="0" column="5">
+        <widget class="QLabel" name="colorExample1">
+         <property name="minimumSize">
+          <size>
+           <width>16</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,0,0">
-         <item>
-          <widget class="QLabel" name="labelColor4">
-           <property name="text">
-            <string>Background color bottom (used)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="editColorBack2">
-           <property name="maximumSize">
-            <size>
-             <width>70</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Courier New</family>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnColor4">
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Pick a color...</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="0" column="4">
+        <widget class="QLineEdit" name="editColorText1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>76</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Courier New</family>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="maxLength">
+          <number>7</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="labelColor2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Text color bottom (used)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="5">
+        <widget class="QLabel" name="colorExample4">
+         <property name="minimumSize">
+          <size>
+           <width>16</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QLineEdit" name="editColorBack1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>76</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Courier New</family>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="maxLength">
+          <number>7</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QLineEdit" name="editColorText2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>76</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Courier New</family>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="maxLength">
+          <number>7</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="7">
+        <widget class="QPushButton" name="btnColor3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Pick a color...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="labelColor3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Background color top (free)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <widget class="QLabel" name="colorExample2">
+         <property name="minimumSize">
+          <size>
+           <width>16</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4">
+        <widget class="QLineEdit" name="editColorBack2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>76</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Courier New</family>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="maxLength">
+          <number>7</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="5">
+        <widget class="QLabel" name="colorExample3">
+         <property name="minimumSize">
+          <size>
+           <width>16</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="7">
+        <widget class="QPushButton" name="btnColor1">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Pick a color...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="labelColor4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Background color bottom (used)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="labelColor1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Text color top (free)</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -308,6 +490,28 @@
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>438</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>Abo&amp;ut</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuAbout"/>
+  </widget>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
@@ -321,12 +525,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>400</x>
-     <y>106</y>
+     <x>281</x>
+     <y>169</y>
     </hint>
     <hint type="destinationlabel">
-     <x>452</x>
-     <y>108</y>
+     <x>356</x>
+     <y>165</y>
     </hint>
    </hints>
   </connection>
@@ -337,12 +541,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>454</x>
-     <y>110</y>
+     <x>359</x>
+     <y>166</y>
     </hint>
     <hint type="destinationlabel">
-     <x>292</x>
-     <y>103</y>
+     <x>301</x>
+     <y>161</y>
     </hint>
    </hints>
   </connection>

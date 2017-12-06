@@ -1,31 +1,33 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDialog>
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QColorDialog>
 #include <QLineEdit>
+#include <QCheckBox>
+#include <QScopedPointer>
 #include <QDebug>
+
+#include "aboutdialog.h"
 #include "settings.h"
 
 namespace Ui {
-class SettingsWindow;
+    class MainWindow;
 }
 
-#include <QDialog>
-
-class SettingsWindow : public QDialog
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-signals:
-    void UnloadWindow();
-
 private:
-    Ui::SettingsWindow *ui;
-    Settings* settings;
-    int MASK_LENGTH = 0;
-    bool LOADING_SETTINGS = false;
+    Ui::MainWindow *ui;
+    Settings* settings = nullptr;
+    int m_maskLength = 0;
+    bool m_loadingSettings = false;
+    AboutDialog aboutDialog;
+
     void closeEvent(QCloseEvent *event);
     void openColorDialog(QLineEdit *lineEdit);
     void enableRelevantGuiOnly();
@@ -35,8 +37,8 @@ private:
     void replaceSpaceWithZero(QLineEdit *lineEdit, const QString &arg);
 
 public:
-    explicit SettingsWindow(Settings* s, QWidget *parent = 0);
-    ~SettingsWindow();
+    explicit MainWindow(Settings* s, QWidget *parent = 0);
+    ~MainWindow();
 
 private slots:
     void on_btnColor1_clicked();
@@ -55,6 +57,8 @@ private slots:
     void on_editColorText2_textChanged(const QString &arg1);
     void on_editColorBack1_textChanged(const QString &arg1);
     void on_editColorBack2_textChanged(const QString &arg1);
+    void on_actionAbout_triggered();
+    void on_checkBoxAvailableMemory_toggled(bool checked);
 };
 
 #endif // MAINWINDOW_H

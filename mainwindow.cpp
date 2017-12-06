@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-SettingsWindow::SettingsWindow(Settings *s, QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::SettingsWindow),
+MainWindow::MainWindow(Settings *s, QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow),
     settings(s)
 {
     ui->setupUi(this);
@@ -12,9 +12,13 @@ SettingsWindow::SettingsWindow(Settings *s, QWidget *parent) :
     enableRelevantGuiOnly();
     ui->btnApply->setEnabled(false);
 
+    #ifdef _WIN32
+        ui->checkBoxFreeIncludesCache->setEnabled( false);
+    #endif
+
     // Only hexadecimal in color input.
     QString mask = "\\#HHHHHH";
-    MASK_LENGTH = mask.length();
+    m_maskLength = mask.length();
     ui->editColorText1->setInputMask(mask);
     ui->editColorText2->setInputMask(mask);
     ui->editColorBack1->setInputMask(mask);
@@ -22,7 +26,7 @@ SettingsWindow::SettingsWindow(Settings *s, QWidget *parent) :
 
     // Resize editBoxes to contents.
     QFontMetrics fontMetrics( ui->editColorText1->font());
-    int width = fontMetrics.width(mask);
+    int width = fontMetrics.width(mask) + 10;
     ui->editColorText1->setMinimumWidth(width);
     ui->editColorText2->setMinimumWidth(width);
     ui->editColorBack1->setMinimumWidth(width);
@@ -33,12 +37,12 @@ SettingsWindow::SettingsWindow(Settings *s, QWidget *parent) :
     ui->editColorBack2->setMaximumWidth(width);
 }
 
-SettingsWindow::~SettingsWindow()
+MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-void MainWindow::closeEvent(QCloseEvent *event) // hide window instead of closing program.
+void MainWindow::closeEvent(QCloseEvent *event) // on close: just do cancel.
 {
     on_btnCancel_clicked();
     event->ignore();
@@ -57,7 +61,7 @@ void MainWindow::openColorDialog(QLineEdit* lineEdit)
 
 void MainWindow::loadSettingsToGui()
 {
-    LOADING_SETTINGS = true;
+    m_loadingSettings = true;
     ui->spinBoxInterval->setValue( settings->value("refreshInterval").toInt());
     ui->checkBoxShowValue->setChecked( settings->value("showValue").toBool());
     ui->radioShowSolidBackground->setChecked( settings->value("showBackground").toBool());
@@ -66,7 +70,8 @@ void MainWindow::loadSettingsToGui()
     ui->editColorText2->setText( settings->value("colorText2").toString());
     ui->editColorBack1->setText( settings->value("colorBack1").toString());
     ui->editColorBack2->setText( settings->value("colorBack2").toString());
-    LOADING_SETTINGS = false;
+    ui->checkBoxAvailableMemory->setChecked( settings->value("availableMemory").toBool());
+    m_loadingSettings = false;
 }
 
 void MainWindow::saveSettings()
@@ -79,6 +84,7 @@ void MainWindow::saveSettings()
     settings->insert("colorText2", ui->editColorText2->text());
     settings->insert("colorBack1", ui->editColorBack1->text());
     settings->insert("colorBack2", ui->editColorBack2->text());
+    settings->insert("availableMemory", ui->checkBoxAvailableMemory->isChecked());
 }
 
 void MainWindow::enableRelevantGuiOnly()
@@ -140,18 +146,17 @@ void MainWindow::on_btnColor4_clicked()
 
 void MainWindow::on_btnCancel_clicked()
 {
-    this->hide();
     settings->undoChanges();
     loadSettingsToGui();
-    enableRelevantGuiOnly();
     ui->btnApply->setEnabled(false);
+    hide();
 }
 
 void MainWindow::on_btnOK_clicked()
 {
     saveSettings();
     settings->applyChangesAndSave();
-    this->hide();
+    hide();
 }
 
 void MainWindow::on_btnApply_clicked()
@@ -168,6 +173,7 @@ void MainWindow::somethingChanged()
 
 void MainWindow::on_spinBoxInterval_valueChanged(int arg1)
 {
+    Q_UNUSED(arg1);
     somethingChanged();
 }
 
@@ -191,38 +197,53 @@ void MainWindow::on_checkBoxShowValue_clicked()
 
 void MainWindow::replaceSpaceWithZero(QLineEdit* lineEdit, const QString &arg)
 {
-    if (LOADING_SETTINGS) return;
-    if (arg.length() == MASK_LENGTH) return;
+    if (m_loadingSettings) return;
+    if (arg.length() == m_maskLength) return;
 
     int pos = lineEdit->cursorPosition();
 
     QString argEdit = arg;
-    argEdit.resize( MASK_LENGTH, '0');
-    lineEdit->setText(argEdit);
+    argEdit.resize( m_maskLength, '0');
 
+    lineEdit->setText(argEdit);
     lineEdit->setCursorPosition(pos);
 }
 
 void MainWindow::on_editColorText1_textChanged(const QString &arg1)
 {
     replaceSpaceWithZero(ui->editColorText1, arg1);
+    ui->colorExample1->setStyleSheet("background-color:" + arg1 + ";");
     somethingChanged();
 }
 
 void MainWindow::on_editColorText2_textChanged(const QString &arg1)
 {
     replaceSpaceWithZero(ui->editColorText2, arg1);
+    ui->colorExample2->setStyleSheet("background-color:" + arg1 + ";");
     somethingChanged();
 }
 
 void MainWindow::on_editColorBack1_textChanged(const QString &arg1)
 {
     replaceSpaceWithZero(ui->editColorBack1, arg1);
+    ui->colorExample3->setStyleSheet("background-color:" + arg1 + ";");
     somethingChanged();
 }
 
 void MainWindow::on_editColorBack2_textChanged(const QString &arg1)
 {
     replaceSpaceWithZero(ui->editColorBack2, arg1);
+    ui->colorExample4->setStyleSheet("background-color:" + arg1 + ";");
+    somethingChanged();
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    aboutDialog.exec();
+}
+
+void MainWindow::on_checkBoxAvailableMemory_toggled(bool checked)
+{
+    Q_UNUSED(checked);
     somethingChanged();
 }

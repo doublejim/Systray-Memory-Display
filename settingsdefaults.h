@@ -16,6 +16,7 @@ struct DefaultSettings
         defaultSettings.insert("showBackground", false);
         defaultSettings.insert("showBackgroundProgress", true);
         defaultSettings.insert("showValue", true);
+        defaultSettings.insert("availableMemory", true);
         return defaultSettings;
     }
 };
