@@ -14,17 +14,17 @@ TEMPLATE = app
 SOURCES += main.cpp \
     aboutdialog.cpp \
     trayicon.cpp \
-    mainwindow.cpp \
     settings.cpp \
-    memoryusage.cpp
+    memoryusage.cpp \
+    mainwindow.cpp
 
 HEADERS  += \
     aboutdialog.h \
     memoryusage.h \
     settings.h \
-    settingsdefaults.h \
     trayicon.h \
-    mainwindow.h
+    mainwindow.h \
+    defaultsettings.h
 
 FORMS    += \
     aboutdialog.ui \

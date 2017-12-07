@@ -4,6 +4,12 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    new TrayIcon;
-    return a.exec();
+    qApp->setQuitOnLastWindowClosed(false);
+
+    TrayIcon* trayIcon = new TrayIcon;
+
+    int result = a.exec();
+
+    delete trayIcon;
+    return result;
 }

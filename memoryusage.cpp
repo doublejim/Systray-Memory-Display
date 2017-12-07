@@ -1,27 +1,26 @@
 #include "memoryusage.h"
 
-// =========== WINDOWS ===========
+// =========== LINUX ===========
 
-#ifdef _WIN32
+#if defined(Q_OS_WIN)
 
 MemoryUsage::MemoryUsage()
 {
-    statex.dwLength = sizeof (statex);
+    m_statex.dwLength = sizeof (m_statex);
 }
 
 double MemoryUsage::getMemoryUsed_inPercent()
 {
-    GlobalMemoryStatusEx (&statex);
-    qint64 totalBytes = statex.ullTotalPhys;
-    qint64 freeBytes = statex.ullAvailPhys;
+    GlobalMemoryStatusEx (&m_statex);
+    qint64 totalBytes = m_statex.ullTotalPhys;
+    qint64 freeBytes = m_statex.ullAvailPhys;
     return 100 - 100.0 * freeBytes / totalBytes;
 }
-
 #endif
 
 // =========== LINUX ===========
 
-#ifdef __linux__
+#if defined(Q_OS_LINUX)
 MemoryUsage::~MemoryUsage() {
     delete[] bytes;
 }

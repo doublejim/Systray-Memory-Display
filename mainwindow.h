@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QDialog>
-#include <QMainWindow>
 #include <QCloseEvent>
 #include <QColorDialog>
 #include <QLineEdit>
@@ -14,16 +13,21 @@
 #include "settings.h"
 
 namespace Ui {
-    class MainWindow;
+class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public QDialog
 {
     Q_OBJECT
 
+public:
+    explicit MainWindow(Settings* s, QWidget *parent = 0);
+    ~MainWindow();
+
 private:
     Ui::MainWindow *ui;
-    Settings* settings = nullptr;
+    Settings* settings;
+
     int m_maskLength = 0;
     bool m_loadingSettings = false;
     AboutDialog aboutDialog;
@@ -35,10 +39,6 @@ private:
     void saveSettings();
     void somethingChanged();
     void replaceSpaceWithZero(QLineEdit *lineEdit, const QString &arg);
-
-public:
-    explicit MainWindow(Settings* s, QWidget *parent = 0);
-    ~MainWindow();
 
 private slots:
     void on_btnColor1_clicked();
@@ -57,8 +57,8 @@ private slots:
     void on_editColorText2_textChanged(const QString &arg1);
     void on_editColorBack1_textChanged(const QString &arg1);
     void on_editColorBack2_textChanged(const QString &arg1);
-    void on_actionAbout_triggered();
     void on_checkBoxAvailableMemory_toggled(bool checked);
+    void on_toolButton_clicked();
 };
 
 #endif // MAINWINDOW_H

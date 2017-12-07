@@ -5,20 +5,21 @@
 
 // =========== WINDOWS ===========
 
-#ifdef _WIN32
+#if defined(Q_OS_WIN)
+
 #include <windows.h>
 
 struct MemoryUsage
 {
-    MEMORYSTATUSEX statex;
+    MEMORYSTATUSEX m_statex;
     MemoryUsage();
     double getMemoryUsed_inPercent();
-}
+};
 #endif
 
 // =========== LINUX ===========
 
-#ifdef __linux__
+#if defined(Q_OS_LINUX)
 
 #include <QFile>
 #include <QRegularExpression>

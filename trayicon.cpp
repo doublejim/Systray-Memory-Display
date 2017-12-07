@@ -1,9 +1,7 @@
 #include "trayicon.h"
 
-
 TrayIcon::TrayIcon():
-    settings (new Settings("settings.json")),
-    window(settings)
+    settings (new Settings("settings.json"))
 {
     // Load settings, and prepare for settings change.
     loadSettings();
@@ -37,10 +35,10 @@ TrayIcon::TrayIcon():
 TrayIcon::~TrayIcon()
 {
     m_shuttingDown = true;
+
     delete showSettingsAction;
     delete quitProgramAction;
     delete settings;            // Meaning: save settings via its destructor. Then free memory.
-    window.deleteLater();
 }
 
 void TrayIcon::loadSettings()
@@ -67,7 +65,7 @@ void TrayIcon::applySettings()
     refreshTimer.setInterval(m_refreshInterval);
 
     // Set option on memUsage object.
-    #ifdef __linux__
+    #if defined(Q_OS_LINUX)
         memUsage.setAvailableMemory( m_availableMemory);
     #endif
 
@@ -91,22 +89,26 @@ void TrayIcon::refresh()
     int memoryUsed = memUsage.getMemoryUsed_inPercent();
     trayIcon.setIcon( allIcons.value( memoryUsed, generateIcon(0)));
 
-    // if (window != nullptr)
-    window.setWindowIcon( allIcons.value( memoryUsed, generateIcon(0)));
+    if (window != nullptr)
+        window->setWindowIcon( allIcons.value( memoryUsed, generateIcon(0)));
 
     trayIcon.setToolTip("Memory Usage: " + QString::number(memoryUsed) + "%");
 }
 
 void TrayIcon::showSettingsWindow()
 {
-    QScreen *screen = QGuiApplication::primaryScreen();
-    window.showNormal();
-    window.move( screen->availableGeometry().center() - QPoint( window.width(), window.height()) / 2);
+    if (window != nullptr)
+        return;
+
+    window = new MainWindow( settings);
+    window->setAttribute( Qt::WA_DeleteOnClose);
+    window->exec();
+    window = nullptr;
 }
 
 void TrayIcon::quitProgram()
 {
-    delete this;
+    qApp->quit();           // quit the event loop. then run trayicon destructor in main.
 }
 
 void TrayIcon::iconActivated(QSystemTrayIcon::ActivationReason reason)

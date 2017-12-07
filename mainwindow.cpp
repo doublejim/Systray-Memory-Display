@@ -1,19 +1,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(Settings *s, QWidget *parent) :
-    QMainWindow(parent),
+MainWindow::MainWindow( Settings* s, QWidget *parent) :
+    QDialog(parent),
     ui(new Ui::MainWindow),
     settings(s)
 {
     ui->setupUi(this);
+    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
     loadSettingsToGui();
     enableRelevantGuiOnly();
     ui->btnApply->setEnabled(false);
 
-    #ifdef _WIN32
-        ui->checkBoxFreeIncludesCache->setEnabled( false);
+    #if defined(Q_OS_WIN)
+      ui->checkBoxAvailableMemory->setEnabled( false);
     #endif
 
     // Only hexadecimal in color input.
@@ -56,7 +57,7 @@ void MainWindow::openColorDialog(QLineEdit* lineEdit)
     currentColor.setNamedColor( lineEdit->text());
     QColor color = dialog.getColor(currentColor);
     if (color.isValid())
-        lineEdit->setText( color.name());
+      lineEdit->setText( color.name());
 }
 
 void MainWindow::loadSettingsToGui()
@@ -149,14 +150,14 @@ void MainWindow::on_btnCancel_clicked()
     settings->undoChanges();
     loadSettingsToGui();
     ui->btnApply->setEnabled(false);
-    hide();
+    done(0);
 }
 
 void MainWindow::on_btnOK_clicked()
 {
     saveSettings();
     settings->applyChangesAndSave();
-    hide();
+    done(0);
 }
 
 void MainWindow::on_btnApply_clicked()
@@ -237,13 +238,13 @@ void MainWindow::on_editColorBack2_textChanged(const QString &arg1)
     somethingChanged();
 }
 
-void MainWindow::on_actionAbout_triggered()
-{
-    aboutDialog.exec();
-}
-
 void MainWindow::on_checkBoxAvailableMemory_toggled(bool checked)
 {
     Q_UNUSED(checked);
     somethingChanged();
+}
+
+void MainWindow::on_toolButton_clicked()
+{
+    aboutDialog.exec();
 }

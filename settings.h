@@ -1,7 +1,7 @@
 #ifndef SETTINGS
 #define SETTINGS
 
-#include "settingsdefaults.h"
+#include "defaultsettings.h"
 #include <QString>
 #include <QFile>
 #include <QJsonDocument>

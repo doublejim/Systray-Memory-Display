@@ -1,7 +1,6 @@
 #ifndef TRAYICON
 #define TRAYICON
 
-#include <QCoreApplication>
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QPainter>
@@ -20,14 +19,14 @@ class TrayIcon : public QObject
 private:
     QMenu trayIconMenu;
     QSystemTrayIcon trayIcon;
-    QAction* showSettingsAction = nullptr;
-    QAction* quitProgramAction = nullptr;
     QMap <int, QIcon> allIcons;
     MemoryUsage memUsage;
     QTimer refreshTimer;
-    Settings* settings = nullptr;
-    MainWindow window;
     bool m_shuttingDown = false;
+    QAction* showSettingsAction = nullptr;
+    QAction* quitProgramAction = nullptr;
+    Settings* settings = nullptr;
+    MainWindow* window = nullptr;
 
     QColor m_colorText1;
     QColor m_colorText2;

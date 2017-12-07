@@ -1,5 +1,5 @@
-#ifndef SETTINGSDEFAULTS
-#define SETTINGSDEFAULTS
+#ifndef DEFAULTSETTINGS_H
+#define DEFAULTSETTINGS_H
 
 #include <QJsonObject>
 
@@ -21,5 +21,5 @@ struct DefaultSettings
     }
 };
 
-#endif // SETTINGSDEFAULTS
+#endif // DEFAULTSETTINGS_H
 
