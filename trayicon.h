@@ -51,6 +51,9 @@ private:
 public:
     TrayIcon();
     ~TrayIcon();
+
+private slots:
+    void deleteMainWindow();
 };
 
 #endif // TRAYICON

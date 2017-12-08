@@ -102,8 +102,15 @@ void TrayIcon::showSettingsWindow()
         return;
 
     window = new MainWindow( settings);
+    connect( window, &MainWindow::sCloseWindow, this, &TrayIcon::deleteMainWindow);
     window->setAttribute( Qt::WA_DeleteOnClose);
     window->show();
+}
+
+void TrayIcon::deleteMainWindow()
+{
+    if (window != nullptr)
+        window->deleteLater();
     window = nullptr;
 }
 

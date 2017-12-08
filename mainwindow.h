@@ -20,6 +20,9 @@ class MainWindow : public QDialog
 {
     Q_OBJECT
 
+signals:
+    void sCloseWindow();
+
 public:
     explicit MainWindow(Settings* s, QWidget *parent = 0);
     ~MainWindow();

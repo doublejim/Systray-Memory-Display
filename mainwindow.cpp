@@ -45,8 +45,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *event) // on close: just do cancel.
 {
-    on_btnCancel_clicked();
     event->ignore();
+    on_btnCancel_clicked();
 }
 
 void MainWindow::openColorDialog(QLineEdit* lineEdit)
@@ -150,14 +150,16 @@ void MainWindow::on_btnCancel_clicked()
     settings->undoChanges();
     loadSettingsToGui();
     ui->btnApply->setEnabled(false);
-    done(0);
+    emit sCloseWindow();
+    //done(0);
 }
 
 void MainWindow::on_btnOK_clicked()
 {
     saveSettings();
     settings->applyChangesAndSave();
-    done(0);
+    emit sCloseWindow();
+    //done(0);
 }
 
 void MainWindow::on_btnApply_clicked()
