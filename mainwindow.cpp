@@ -204,7 +204,11 @@ void MainWindow::replaceSpaceWithZero(QLineEdit* lineEdit, const QString &arg)
     int pos = lineEdit->cursorPosition();
 
     QString argEdit = arg;
-    argEdit.resize( m_maskLength, '0');
+    #if (QT_VERSION > 0x050500)    // Later than 5.5. Maybe even later.
+        argEdit.resize( m_maskLength, '0');
+    #else
+        argEdit += QString( m_maskLength - argEdit.size(), '0');
+    #endif
 
     lineEdit->setText(argEdit);
     lineEdit->setCursorPosition(pos);
