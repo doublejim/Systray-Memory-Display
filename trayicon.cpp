@@ -56,6 +56,7 @@ void TrayIcon::loadSettings()
 
 void TrayIcon::generateIconsWithCurrentSettings()
 {
+    allIcons.clear();
     for (int i = 0; i <= 100; ++i)
         allIcons.insert(i, generateIcon(i));
 }
@@ -102,7 +103,7 @@ void TrayIcon::showSettingsWindow()
 
     window = new MainWindow( settings);
     window->setAttribute( Qt::WA_DeleteOnClose);
-    window->exec();
+    window->show();
     window = nullptr;
 }
 

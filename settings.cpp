@@ -58,6 +58,7 @@ void Settings::applyChanges()
 
     while (it != m_objectChanges.end())
     {
+        m_object.remove( it.key());
         m_object.insert( it.key(), it.value());
         ++it;
     }
