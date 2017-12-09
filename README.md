@@ -4,5 +4,7 @@ Simple but useful application for monitoring your system memory usage. For Windo
 The program shows a system tray icon which updates according to the percentage of used system memory.
 You can choose how often it should update the icon, and set the colors to what suits you best.
 
+Screenshots / Download: https://sourceforge.net/projects/systray-memory-display/
+
 License: GPLv3.
 
