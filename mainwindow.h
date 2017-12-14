@@ -5,8 +5,8 @@
 #include <QCloseEvent>
 #include <QColorDialog>
 #include <QLineEdit>
+#include <QLabel>
 #include <QCheckBox>
-#include <QScopedPointer>
 #include <QDebug>
 
 #include "aboutdialog.h"
@@ -41,7 +41,7 @@ private:
     void loadSettingsToGui();
     void saveSettings();
     void somethingChanged();
-    void replaceSpaceWithZero(QLineEdit *lineEdit, const QString &arg);
+    void colorValueChanged(QLineEdit *lineEdit, QLabel *colorExampleLabel, const QString &arg);
 
 private slots:
     void on_btnColor1_clicked();

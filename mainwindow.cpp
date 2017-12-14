@@ -9,6 +9,10 @@ MainWindow::MainWindow( Settings* s, QWidget *parent) :
     ui->setupUi(this);
     this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
+    // Only hexadecimal in color input.
+    QString mask = "\\#HHHHHH";
+    m_maskLength = mask.length();
+
     loadSettingsToGui();
     enableRelevantGuiOnly();
     ui->btnApply->setEnabled(false);
@@ -17,9 +21,6 @@ MainWindow::MainWindow( Settings* s, QWidget *parent) :
       ui->checkBoxAvailableMemory->setEnabled( false);
     #endif
 
-    // Only hexadecimal in color input.
-    QString mask = "\\#HHHHHH";
-    m_maskLength = mask.length();
     ui->editColorText1->setInputMask(mask);
     ui->editColorText2->setInputMask(mask);
     ui->editColorBack1->setInputMask(mask);
@@ -151,7 +152,6 @@ void MainWindow::on_btnCancel_clicked()
     loadSettingsToGui();
     ui->btnApply->setEnabled(false);
     emit sCloseWindow();
-    //done(0);
 }
 
 void MainWindow::on_btnOK_clicked()
@@ -159,7 +159,6 @@ void MainWindow::on_btnOK_clicked()
     saveSettings();
     settings->applyChangesAndSave();
     emit sCloseWindow();
-    //done(0);
 }
 
 void MainWindow::on_btnApply_clicked()
@@ -198,49 +197,43 @@ void MainWindow::on_checkBoxShowValue_clicked()
     enableRelevantGuiOnly();
 }
 
-void MainWindow::replaceSpaceWithZero(QLineEdit* lineEdit, const QString &arg)
+void MainWindow::colorValueChanged(QLineEdit* lineEdit, QLabel* colorExampleLabel, const QString &arg)
 {
-    if (m_loadingSettings) return;
-    if (arg.length() == m_maskLength) return;
-
+    QString argEdit = arg.mid( 0, m_maskLength - 1);
     int pos = lineEdit->cursorPosition();
 
-    QString argEdit = arg;
     #if (QT_VERSION >= 0x050600)    // Later than 5.51. Maybe even later.
-        argEdit.resize( m_maskLength, '0');
+        argEdit.resize( m_maskLength - 1, '0');
     #else
         argEdit += QString( m_maskLength - argEdit.size(), '0');
     #endif
 
     lineEdit->setText(argEdit);
     lineEdit->setCursorPosition(pos);
+    colorExampleLabel->setStyleSheet("background-color:" + argEdit + ";");
 }
 
 void MainWindow::on_editColorText1_textChanged(const QString &arg1)
 {
-    replaceSpaceWithZero(ui->editColorText1, arg1);
-    ui->colorExample1->setStyleSheet("background-color:" + arg1 + ";");
+    colorValueChanged( ui->editColorText1, ui->colorExample1, arg1);
     somethingChanged();
 }
 
 void MainWindow::on_editColorText2_textChanged(const QString &arg1)
 {
-    replaceSpaceWithZero(ui->editColorText2, arg1);
-    ui->colorExample2->setStyleSheet("background-color:" + arg1 + ";");
+    colorValueChanged(ui->editColorText2, ui->colorExample2, arg1);
     somethingChanged();
 }
 
 void MainWindow::on_editColorBack1_textChanged(const QString &arg1)
 {
-    replaceSpaceWithZero(ui->editColorBack1, arg1);
-    ui->colorExample3->setStyleSheet("background-color:" + arg1 + ";");
+    colorValueChanged(ui->editColorBack1, ui->colorExample3, arg1);
     somethingChanged();
 }
 
 void MainWindow::on_editColorBack2_textChanged(const QString &arg1)
 {
-    replaceSpaceWithZero(ui->editColorBack2, arg1);
-    ui->colorExample4->setStyleSheet("background-color:" + arg1 + ";");
+    colorValueChanged(ui->editColorBack2, ui->colorExample4, arg1);
     somethingChanged();
 }
 
